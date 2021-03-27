@@ -1,0 +1,9 @@
+.vscode
+__pycache__
+.pytest_cache
+cromedriver
+Jenkinsfile
+.idea
+.idea/*
+geckodriver.log
+p38_venv
