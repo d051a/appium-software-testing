@@ -1,0 +1,6 @@
+adb shell pm list packages | grep "wiki"
+--> package:org.wikipedia
+
+adb shell dumpsys window windows >> activity.txt
+--> org.wikipedia.main.MainActivity
+
