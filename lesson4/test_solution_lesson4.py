@@ -160,8 +160,9 @@ class TestLesson4:
 
     def test_ex7(self):
         # def setup(self):
+        #     capabilities['orientation'] = 'PORTRAIT'
         #     self.driver = webdriver.Remote(APPIUM_ADDR, capabilities)
-        #     self.driver.orientation = "PORTRAIT"
+        #     # self.driver.orientation = "PORTRAIT"
         #     self.click_skip_button_if_exists()
         pass
 
