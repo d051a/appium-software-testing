@@ -27,7 +27,6 @@ class TestLesson4:
 
     def setup(self):
         self.driver = webdriver.Remote(APPIUM_ADDR, capabilities)
-        # self.driver.implicitly_wait(5)
         self.click_skip_button_if_exists()
 
     def teardown(self):
@@ -160,9 +159,10 @@ class TestLesson4:
         assert self.assert_element_present() is "Article title is exist!"
 
     def test_ex7(self):
-        # def teardown(self):
+        # def setup(self):
+        #     self.driver = webdriver.Remote(APPIUM_ADDR, capabilities)
         #     self.driver.orientation = "PORTRAIT"
-        #     self.driver.quit()
+        #     self.click_skip_button_if_exists()
         pass
 
 
