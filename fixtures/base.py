@@ -6,6 +6,7 @@ from appium import webdriver
 
 @pytest.fixture(scope='function')
 def driver():
+    capabilities['orientation'] = 'PORTRAIT'
     driver = webdriver.Remote(APPIUM_ADDR, capabilities)
     yield driver
     driver.quit()
