@@ -47,3 +47,18 @@ class TestLesson5:
         explore_screen.search_field.send_keys('Java')
         explore_screen.search_results[0].click()
         assert article_screen.assert_title_present() is "Article title is exist!"
+
+    def test_ex9(self, explore_screen):
+        search_text = 'Windows Server'
+        explore_screen.search_field.send_keys(search_text)
+        articles_with_text_in_title_and_description = explore_screen.\
+            wait_for_element_by_title_and_description('Windows Server',
+                                                      'operating system')
+        all_find_articles = explore_screen.search_results
+        print('articles_with_text_in_title_and_description', articles_with_text_in_title_and_description)
+        print('all_find_articles: - ', all_find_articles)
+
+        for num, article in enumerate(articles_with_text_in_title_and_description):
+            assert article == all_find_articles[num]
+
+

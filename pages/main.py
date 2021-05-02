@@ -15,9 +15,10 @@ class BasePage:
         self.click_skip_button_if_exists()
 
     @staticmethod
-    def __replace_substring(locator, substring):
-        by, element_locator = locator
-        str(element_locator).replace("{SUBSTRING}", substring)
+    def _replace_substring(locator, input_substring, replace_substring):
+        by, element_locator = locator[0], locator[1]
+        element_locator = str(element_locator).replace(input_substring,
+                                                       replace_substring)
         return by, element_locator
 
     def click_skip_button_if_exists(self):

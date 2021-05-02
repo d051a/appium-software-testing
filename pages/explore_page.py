@@ -9,12 +9,10 @@ class ExploreLocator:
     search_field = (By.ID, "org.wikipedia:id/search_container")
     close_search_button = (By.ID, "org.wikipedia:id/search_close_btn")
     search_results_list = (By.ID, "org.wikipedia:id/page_list_item_title")
-    search_result_object = (By.XPATH,
-                            "//*[@resource-id='org.wikipedia:id/search_results_list']//*[@class='android.view.ViewGroup']")
-    back_arrow = (By.XPATH,
-                  "//*[@resource-id='org.wikipedia:id/search_toolbar']//*[@class='android.widget.ImageButton']")
-    saved_button = (By.XPATH,
-                    "//android.widget.FrameLayout[@content-desc='Saved']/android.widget.ImageView")
+    search_result_object = (By.XPATH, "//*[@resource-id='org.wikipedia:id/search_results_list']//*[@class='android.view.ViewGroup']")
+    back_arrow = (By.XPATH, "//*[@resource-id='org.wikipedia:id/search_toolbar']//*[@class='android.widget.ImageButton']")
+    saved_button = (By.XPATH, "//android.widget.FrameLayout[@content-desc='Saved']/android.widget.ImageView")
+    element_by_title_and_description = (By.XPATH, "//android.view.ViewGroup[(./android.widget.TextView[(@resource-id='org.wikipedia:id/page_list_item_title' and contains(@text, '{TITLE}'))]) and (./android.widget.TextView[(@resource-id='org.wikipedia:id/page_list_item_description' and contains(@text, '{DESCRIPTION}'))])]")
 
 
 class ExplorePage(BasePage):
@@ -55,3 +53,15 @@ class ExplorePage(BasePage):
         saved_button = self.find_element(ExploreLocator.saved_button)
         return saved_button
 
+    def wait_for_element_by_title_and_description(self, title, description):
+        locator_with_replaced_title = self._replace_substring(
+            ExploreLocator.element_by_title_and_description,
+            '{TITLE}',
+            title)
+        locator_with_replaced_title_end_description = self._replace_substring(
+            locator_with_replaced_title,
+            '{DESCRIPTION}',
+            description)
+        elements = self.find_elements(
+            locator_with_replaced_title_end_description)
+        return elements
