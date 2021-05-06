@@ -7,6 +7,7 @@ from selenium.common.exceptions import TimeoutException
 
 class ExploreLocator:
     search_field = (By.ID, "org.wikipedia:id/search_container")
+    search_field_ios = (By.ID, "org.wikipedia:id/search_container")
     close_search_button = (By.ID, "org.wikipedia:id/search_close_btn")
     search_results_list = (By.ID, "org.wikipedia:id/page_list_item_title")
     search_result_object = (By.XPATH, "//*[@resource-id='org.wikipedia:id/search_results_list']//*[@class='android.view.ViewGroup']")

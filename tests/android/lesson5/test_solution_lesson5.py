@@ -49,16 +49,22 @@ class TestLesson5:
         assert article_screen.assert_title_present() is "Article title is exist!"
 
     def test_ex9(self, explore_screen):
-        search_text = 'Windows Server'
+        search_text = 'JavaScript'
         explore_screen.search_field.send_keys(search_text)
         articles_with_text_in_title_and_description = explore_screen.\
-            wait_for_element_by_title_and_description('Windows Server',
-                                                      'operating system')
+            wait_for_element_by_title_and_description('JavaScript',
+                                                      'High-level')
         all_find_articles = explore_screen.search_results
         print('articles_with_text_in_title_and_description', articles_with_text_in_title_and_description)
         print('all_find_articles: - ', all_find_articles)
 
         for num, article in enumerate(articles_with_text_in_title_and_description):
-            assert article == all_find_articles[num]
+            for element in all_find_articles:
+                if article == element:
+                    print("DONE!", )
+                else:
+                    print("NO!", type(element), type(article))
+            # assert article == all_find_articles[num]
 
 
+# //android.view.ViewGroup[(./android.widget.TextView[(@resource-id='org.wikipedia:id/page_list_item_title' and contains(@text, 'JavaScript'))]) and (./android.widget.TextView[(@resource-id='org.wikipedia:id/page_list_item_description' and contains(@text, 'High-level'))])]
