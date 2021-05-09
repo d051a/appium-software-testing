@@ -54,7 +54,7 @@ class ExploreLocator(Locator):
                      'search_results_list': (By.ID, ""),
                      'cancel_search_button': (By.XPATH, "//XCUIElementTypeStaticText[@name='Cancel']"),
                      'saved_button': (By.XPATH, "//XCUIElementTypeButton[@name='Saved']"),
-                     'element_by_title_and_description': (By.XPATH, ""),
+                     'element_by_title_and_description': (By.XPATH, "//XCUIElementTypeOther[(./XCUIElementTypeStaticText[@name='{TITLE}']) and (./XCUIElementTypeStaticText[@name='{DESCRIPTION}'])]"),
                      },
                 }
 

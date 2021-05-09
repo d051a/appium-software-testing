@@ -45,3 +45,15 @@ class TestLesson7:
         article_list_title_text = last_article.text
         last_article.click()
         assert article_screen.get_article_title_by_search_result_title(article_list_title_text) == article_list_title_text
+
+    def test_ex12(self, welcome_screen, explore_screen):
+        search_text = 'JavaScript'
+        welcome_screen.click_on_skip_button()
+        explore_screen.search_field.click()
+        explore_screen.search_field.send_keys(search_text)
+        explore_screen.wait_for_element_by_title_and_description(
+            'JavaScript', 'High-level programming language')
+        explore_screen.wait_for_element_by_title_and_description(
+            'JavaScript syntax', 'Rule set defining a correctly structured JavaScript program')
+        explore_screen.wait_for_element_by_title_and_description(
+            'JavaScript engine', 'Implementation of JavaScript')
