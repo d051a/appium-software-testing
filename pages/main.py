@@ -2,7 +2,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
-import time
+from appium.webdriver.common.touch_action import TouchAction
 
 
 class BaseLocators:
@@ -12,7 +12,6 @@ class BaseLocators:
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
-        self.click_skip_button_if_exists()
 
     @staticmethod
     def _replace_substring(locator, input_substring, replace_substring):
@@ -51,3 +50,17 @@ class BasePage:
             return True
         else:
             return False
+
+    def click_on_center_element(self, element):
+        left_x = element.location['x']
+        right_x = left_x + element.size['width']
+        upper_y = element.location['y']
+        lower_y = upper_y + element.size['height']
+        middle_y = (upper_y + lower_y) / 2
+        middle_x = (left_x + right_x) / 2
+
+        action = TouchAction(self.driver)
+        action.press(x=middle_x, y=middle_y)
+        action.release()
+        action.perform()
+        return element

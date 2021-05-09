@@ -1,34 +1,36 @@
 from pages.main import BasePage
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-
-
-class SavedLocator:
-    bookmark_folder = (By.XPATH,
-                               "//*[@resource-id='org.wikipedia:id/recycler_view']//*[@class='android.view.ViewGroup']")
-    articles_titles_list = (By.XPATH,
-                            "//android.widget.TextView[contains(@resource-id, 'org.wikipedia:id/page_list_item_title')]")
+from lib.locators import SavedLocator
 
 
 class SavedPage(BasePage):
+    locator = SavedLocator()
+
     def __init__(self, driver):
         super().__init__(driver)
 
     @property
     def bookmark_folders(self):
-        bookmark_folders = self.find_elements(SavedLocator.bookmark_folder)
+        bookmark_folders = self.find_elements(self.locator.get_locator('bookmark_folder'))
         return bookmark_folders
-
-    def get_articles_number(self):
-        articles_number = self.check_elements_amount(SavedLocator.articles_titles_list)
-        return articles_number
 
     @property
     def saved_articles(self):
-        saved_articles = self.find_elements(SavedLocator.articles_titles_list)
+        saved_articles = self.find_elements(self.locator.get_locator('articles_titles_list'))
         return saved_articles
+
+    @property
+    def sync_saved_articles_close_button(self):
+        close_button = self.find_element(self.locator.get_locator('sync_saved_articles_close_button'))
+        return close_button
+
+    @property
+    def delete_button(self):
+        delete_button = self.find_element(self.locator.get_locator('delete_button'))
+        return delete_button
+
+    def get_articles_number(self):
+        articles_number = self.check_elements_amount(self.locator.get_locator('articles_titles_list'))
+        return articles_number
 
     def swipe_left(self, element):
         left_x = element.location['x']
@@ -37,3 +39,5 @@ class SavedPage(BasePage):
         lower_y = upper_y + element.size['height']
         middle_y = (upper_y + lower_y) / 2
         self.driver.swipe(right_x - 5, middle_y, left_x + 5, middle_y, 400)
+
+

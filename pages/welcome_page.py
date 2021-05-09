@@ -1,29 +1,24 @@
 from pages.main import BasePage
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-import capabilities
-
-
-class WelcomeLocators:
-    skip_button = (By.ID,
-                           "org.wikipedia:id/fragment_onboarding_skip_button")
-    skip_button_ios = (By.XPATH, "//XCUIElementTypeButton[@name='Skip']")
-    next_button_ios = (By.XPATH, "//XCUIElementTypeStaticText[@name='Next']")
+from lib.locators import WelcomeLocator
 
 
 class WelcomePage(BasePage):
-    def __init__(self, driver):
-        super().__init__(driver)
+    locator = WelcomeLocator()
 
     def click_skip_button_if_exists(self):
-        if capabilities.get_platform() == 'ios':
-            locator = WelcomeLocators.skip_button_ios
-        else:
-            locator = WelcomeLocators.skip_button
-        WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable(locator))
-        if self.driver.find_elements(*locator):
-            self.driver.find_element(*locator).\
+        skip_button_locator = self.locator.get_locator('skip_button')
+        WebDriverWait(self.driver, 3).until(
+            EC.element_to_be_clickable(skip_button_locator))
+        if self.driver.find_elements(*skip_button_locator):
+            self.driver.find_element(*skip_button_locator).\
                 click()
 
+    @property
+    def skip_button(self):
+        skip_button = self.find_element(self.locator.get_locator('skip_button'))
+        return skip_button
+
+    def click_on_skip_button(self):
+        self.click_on_center_element(self.skip_button)

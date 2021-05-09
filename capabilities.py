@@ -15,7 +15,10 @@ capabilities = {
         "deviceName": "iPhone 8",
         "orientation": "PORTRAIT",
         "platformVersion": "13.5",
-        "app": "/Users/d051a/Desktop/LEARN/APPIUM/apps/Wikipedia.app"
+        "app": "/Users/d051a/Desktop/LEARN/APPIUM/apps/Wikipedia.app",
+        "LOCALE": "en",
+        "LANGAUGE": "en",
+        "sendKeyStrategy": "setValue"
     },
 }
 
