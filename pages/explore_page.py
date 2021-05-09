@@ -60,6 +60,6 @@ class ExplorePage(BasePage):
             locator_with_replaced_title,
             '{DESCRIPTION}',
             description)
-        elements = self.find_elements(
+        elements = self.find_element(
             locator_with_replaced_title_end_description)
         return elements
