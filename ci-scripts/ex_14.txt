@@ -1,0 +1,7 @@
+export PLATFORM=android
+cd /Users/d051a/Desktop/LEARN/APPIUM/software-testing/
+JENKINS_NODE_COOKIE=dontKillMe nohup bash ci-scripts/run_emulator.sh
+JENKINS_NODE_COOKIE=dontKillMe nohup bash ci-scripts/run_appium.sh
+source p38_venv/bin/activate
+pip install -r requirements.txt
+pytest -s tests/android/lesson2/test_ex1.py
