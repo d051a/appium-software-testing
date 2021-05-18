@@ -1,0 +1,6 @@
+export PLATFORM=ios
+cd /Users/d051a/Desktop/LEARN/APPIUM/software-testing/
+JENKINS_NODE_COOKIE=dontKillMe nohup bash ci-scripts/run_appium.sh
+source p38_venv/bin/activate
+pip install -r requirements.txt
+pytest -s tests/ios/lesson7/test_solution_lesson7.py::TestLesson7::test_ex12
