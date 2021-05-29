@@ -28,6 +28,15 @@ class SavedPage(BasePage):
         delete_button = self.find_element(self.locator.get_locator('delete_button'))
         return delete_button
 
+    @property
+    def article_favotirs_marks(self):
+        article_favotirs_mark = self.find_elements(self.locator.get_locator('article_favotirs_mark'))
+        return article_favotirs_mark
+
+    def get_favorits_number(self):
+        favorits_mark_number = self.check_elements_amount(self.locator.get_locator('article_favotirs_mark'))
+        return favorits_mark_number
+
     def get_articles_number(self):
         articles_number = self.check_elements_amount(self.locator.get_locator('articles_titles_list'))
         return articles_number

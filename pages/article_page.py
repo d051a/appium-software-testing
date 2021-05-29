@@ -16,8 +16,12 @@ class ArticlePage(BasePage):
 
     @property
     def back_arrow(self):
-        back_arrow = self.find_element(self.locator.get_locator('back_arrow'))
-        return back_arrow
+        platform = self.platform.get_platform()
+        if self.platform.is_platform(platform):
+            self.driver.back()
+        else:
+            back_arrow = self.find_element(self.locator.get_locator('back_arrow'))
+            return back_arrow
 
     @property
     def article_title(self, title=None):
@@ -31,7 +35,6 @@ class ArticlePage(BasePage):
             title)
         article_title = self.find_element(locator_with_replaced_title)
         return article_title.text
-
 
     def assert_title_present(self):
         locator = self.locator.get_locator('article_title')

@@ -1,7 +1,4 @@
 import pytest
-import capabilities
-from config import APPIUM_ADDR
-from appium import webdriver
 from lib.platform import Platform
 
 

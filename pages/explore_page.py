@@ -3,6 +3,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 from lib.locators import ExploreLocator
+from pages.left_menu_page import LeftMenuPage
 
 
 class ExplorePage(BasePage):
@@ -10,10 +11,16 @@ class ExplorePage(BasePage):
 
     def __init__(self, driver):
         super().__init__(driver)
+        self.left_menu = LeftMenuPage(driver)
 
     @property
     def search_field(self):
         search_field = self.find_element(self.locator.get_locator('search_field'))
+        return search_field
+
+    @property
+    def search_button(self):
+        search_field = self.find_element(self.locator.get_locator('search_button'))
         return search_field
 
     @property
@@ -63,3 +70,8 @@ class ExplorePage(BasePage):
         elements = self.find_element(
             locator_with_replaced_title_end_description)
         return elements
+
+    @property
+    def search_results_favorits(self):
+        search_result = self.find_elements(self.locator.get_locator('search_results_favorits'))
+        return search_result

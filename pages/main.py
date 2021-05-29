@@ -3,6 +3,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from appium.webdriver.common.touch_action import TouchAction
+from lib.platform import Platform
 
 
 class BaseLocators:
@@ -12,6 +13,10 @@ class BaseLocators:
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
+        self.platform = Platform()
+
+    def open_page(self, url):
+        self.driver.get(url)
 
     @staticmethod
     def _replace_substring(locator, input_substring, replace_substring):
@@ -30,7 +35,7 @@ class BasePage:
 
     def find_element(self, locator, time=5):
         return WebDriverWait(self.driver, time).until(
-            EC.presence_of_element_located(locator),
+            EC.element_to_be_clickable(locator),
             message=f"Can't find element with locator: {locator}")
 
     def find_elements(self, locator, time=5):
