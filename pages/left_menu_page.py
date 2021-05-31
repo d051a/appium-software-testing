@@ -1,6 +1,7 @@
 from pages.main import BasePage
 from lib.locators import LeftMenuLocator
 from config import APP_USER, APP_PASSWORD
+import allure
 
 
 class LeftMenuPage(BasePage):
@@ -53,16 +54,18 @@ class LeftMenuPage(BasePage):
             return False
 
     def auth_if_not_login(self):
-        if not self.check_notifications_exist():
-            self.left_menu_button.click()
-            self.left_menu_login_button.click()
-            self.login_field.send_keys(APP_USER)
-            self.password_field.send_keys(APP_PASSWORD)
-            self.login_button.click()
+        with allure.step(f"Логин если пользователь не авторизован"):
+            if not self.check_notifications_exist():
+                self.left_menu_button.click()
+                self.left_menu_login_button.click()
+                self.login_field.send_keys(APP_USER)
+                self.password_field.send_keys(APP_PASSWORD)
+                self.login_button.click()
 
     def open_watchlist(self):
-        self.left_menu_button.click()
-        self.left_menu_watchlist_button.click()
+        with allure.step('Открытие страницы избранных статей'):
+            self.left_menu_button.click()
+            self.left_menu_watchlist_button.click()
 
 
 

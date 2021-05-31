@@ -1,5 +1,6 @@
 from pages.main import BasePage
 from lib.locators import SavedLocator
+import allure
 
 
 class SavedPage(BasePage):
@@ -15,8 +16,19 @@ class SavedPage(BasePage):
 
     @property
     def saved_articles(self):
-        saved_articles = self.find_elements(self.locator.get_locator('articles_titles_list'))
+        with allure.step('Получение списка статей'):
+            saved_articles = self.find_elements(self.locator.get_locator('articles_titles_list'))
         return saved_articles
+
+    def saved_article_click(self, article_id):
+        with allure.step(f'Клик по статье с id {article_id}'):
+            saved_articles = self.saved_articles
+        return saved_articles[article_id].click()
+
+    def saved_article_title(self, article_id):
+        with allure.step(f'Получение текста статьи с id {article_id}'):
+            saved_articles = self.saved_articles
+        return saved_articles[article_id].text
 
     @property
     def sync_saved_articles_close_button(self):
@@ -30,12 +42,21 @@ class SavedPage(BasePage):
 
     @property
     def article_favotirs_marks(self):
-        article_favotirs_mark = self.find_elements(self.locator.get_locator('article_favotirs_mark'))
+        with allure.step('Удаление статьи из избранного'):
+            article_favotirs_mark = self.find_elements(self.locator.get_locator('article_favotirs_mark'))
         return article_favotirs_mark
 
+    def article_favotirs_remove(self, article_id):
+        with allure.step(f'Удаление статьи c id {article_id} из избранного'):
+            article_favotirs_mark = self.article_favotirs_marks
+        return article_favotirs_mark[article_id].click()
+
+
     def get_favorits_number(self):
-        favorits_mark_number = self.check_elements_amount(self.locator.get_locator('article_favotirs_mark'))
-        return favorits_mark_number
+        favorits_mark_number = self.check_elements_amount(
+            self.locator.get_locator('article_favotirs_mark'))
+        with allure.step(f'Получение количества избранных статей: {favorits_mark_number}'):
+            return favorits_mark_number
 
     def get_articles_number(self):
         articles_number = self.check_elements_amount(self.locator.get_locator('articles_titles_list'))

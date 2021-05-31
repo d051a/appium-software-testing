@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from appium.webdriver.common.touch_action import TouchAction
 from lib.platform import Platform
+import allure
 
 
 class BaseLocators:
@@ -16,7 +17,8 @@ class BasePage:
         self.platform = Platform()
 
     def open_page(self, url):
-        self.driver.get(url)
+        with allure.step(f"Открытие страницы {url}"):
+            self.driver.get(url)
 
     @staticmethod
     def _replace_substring(locator, input_substring, replace_substring):

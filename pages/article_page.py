@@ -1,6 +1,6 @@
 from pages.main import BasePage
 from lib.locators import ArticleLocator
-import os
+import allure
 
 
 class ArticlePage(BasePage):
@@ -24,8 +24,9 @@ class ArticlePage(BasePage):
             return back_arrow
 
     @property
-    def article_title(self, title=None):
-        article_title = self.find_element(self.locator.get_locator('article_title'))
+    def article_title(self):
+        with allure.step(f'Получение текста статьи'):
+            article_title = self.find_element(self.locator.get_locator('article_title'))
         return article_title.text
 
     def get_article_title_by_search_result_title(self, title):

@@ -1,3 +1,4 @@
 pytest
 selenium
 Appium-Python-Client
+allure-pytest>=2.5.1

@@ -7,3 +7,4 @@ Jenkinsfile
 .idea/*
 geckodriver.log
 p38_venv
+allure-results
